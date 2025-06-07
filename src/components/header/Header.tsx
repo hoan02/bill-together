@@ -12,16 +12,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useNavStore } from "@/store/nav-store";
+import ThemeToggle from "../custom-ui/theme-toggle";
 
 export function Header() {
   const { activeNavKey } = useNavStore();
 
   // Map activeNavKey to breadcrumb items
   // This mapping can be adjusted as needed
-  const breadcrumbMap: Record<
-    string,
-    { label: string; href?: string }[]
-  > = {
+  const breadcrumbMap: Record<string, { label: string; href?: string }[]> = {
     Playground: [
       { label: "Building Your Application", href: "#" },
       { label: "Playground" },
@@ -77,7 +75,9 @@ export function Header() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <div className="flex items-center gap-2 px-4">ok</div>
+      <div className="flex items-center gap-2 px-4">
+        <ThemeToggle />
+      </div>
     </header>
   );
 }
