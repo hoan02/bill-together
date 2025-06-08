@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
@@ -12,8 +11,6 @@ import { db } from "./db";
 import * as schema from "./db/schema";
 import { sendEmail } from "./email";
 import { ac, admin, user } from "@/lib/permissions";
-import { User } from "@/types/user";
-
 
 export const auth = betterAuth({
   appName: "Bill Together",
@@ -99,16 +96,4 @@ export const auth = betterAuth({
     }),
   ],
 });
-
-export async function currentUser(): Promise<User> {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session?.user) {
-    throw new Error("Not authenticated");
-  }
-
-  return session.user;
-}
 

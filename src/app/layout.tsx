@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BillTogether - Chia sẻ hóa đơn dễ dàng",
+  title: "Bill Together - Chia sẻ hóa đơn dễ dàng",
   description:
     "Ứng dụng giúp bạn chia sẻ và quản lý hóa đơn nhóm một cách nhanh chóng, minh bạch và tiện lợi.",
 };

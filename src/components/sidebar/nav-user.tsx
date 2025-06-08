@@ -25,27 +25,15 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import SignOutButton from "@/components/auth/sign-out-button";
+import { useUserStore } from "@/store/user-store";
 
-export function NavUser({
-  user,
-}: {
-  user:
-    | {
-        id: string;
-        name: string;
-        email: string;
-        emailVerified: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        image?: string | null;
-      }
-    | undefined;
-}) {
+export function NavUser() {
   const { isMobile } = useSidebar();
+  const user = useUserStore((state) => state.user);
 
   const initials = user?.name
     .split(" ")
-    .map((part) => part[0].toUpperCase())
+    .map((part: string) => part[0].toUpperCase())
     .join("");
 
   return (
@@ -57,9 +45,6 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              {/* {console.log("Avatar image:", user?.image)} */}
-              {/* {user?.image && <img src={user.image} alt="debug" />} */}
-
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user?.image ?? undefined} alt={user?.name} />
                 <AvatarFallback className="rounded-lg">

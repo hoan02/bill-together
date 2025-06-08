@@ -15,7 +15,7 @@ export default function ForgotAccountPage() {
     const found = await searchAccount(email);
     if (found) {
       router.push(
-        `/login/forgot-account/forgot-password?email=${encodeURIComponent(
+        `/auth/login/forgot-account/forgot-password?email=${encodeURIComponent(
           email
         )}`
       );

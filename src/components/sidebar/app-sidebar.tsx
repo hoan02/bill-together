@@ -156,21 +156,7 @@ const data = {
   ],
 };
 
-interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user:
-    | {
-        id: string;
-        name: string;
-        email: string;
-        emailVerified: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        image?: string | null | undefined | undefined;
-      }
-    | undefined;
-}
-
-export function AppSidebar({ ...props }: AppSidebarProps) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -181,7 +167,7 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={props.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
