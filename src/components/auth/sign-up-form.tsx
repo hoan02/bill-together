@@ -56,28 +56,26 @@ export default function SignupForm() {
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="firstname" className="block text-sm">
-                Firstname
+                Tên
               </Label>
               <Input type="text" required name="firstname" id="firstname" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lastname" className="block text-sm">
-                Lastname
+                Họ
               </Label>
               <Input type="text" required name="lastname" id="lastname" />
             </div>
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="email" className="block text-sm">
               Email
             </Label>
             <Input type="email" required name="email" id="email" />
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="pwd" className="text-title text-sm">
-              Password
+              Mật khẩu
             </Label>
             <Input
               type="password"
@@ -88,16 +86,15 @@ export default function SignupForm() {
             />
           </div>
           <Button className="w-full" disabled={pending}>
-            Continue
+            Tiếp tục
           </Button>
         </div>
       </div>
-
       <div className="bg-muted rounded-(--radius) border p-3">
         <p className="text-accent-foreground text-center text-sm">
-          Have an account ?
+          Đã có tài khoản?
           <Button asChild variant="link" className="px-2">
-            <Link href="/login">Sign In</Link>
+            <Link href="/auth/login">Đăng nhập</Link>
           </Button>
         </p>
       </div>

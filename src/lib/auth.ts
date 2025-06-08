@@ -19,13 +19,18 @@ export const auth = betterAuth({
   appName: "Bill Together",
   secret: env.BETTER_AUTH_SECRET,
   baseURL: env.BETTER_AUTH_URL,
-  database: drizzleAdapter(db, {
+  database: drizzleAdapter(
+    db, {
     provider: "pg",
     schema: {
       ...schema,
       user: schema.users,
       session: schema.sessions,
       account: schema.accounts,
+      organization: schema.organizations,
+      verification: schema.verifications,
+      invitation: schema.invitations,
+      usePlural: true,
     },
   }),
   emailAndPassword: {

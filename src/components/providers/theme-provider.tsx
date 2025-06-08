@@ -16,7 +16,7 @@ export function ThemeProvider({
 }: ExtendedThemeProviderProps) {
   return (
     <NextThemesProvider {...props}>
-      <div className={cn("container", containerClassName)}>
+      <div className={cn("h-screen w-screen", containerClassName)}>
         {children}
       </div>
     </NextThemesProvider>

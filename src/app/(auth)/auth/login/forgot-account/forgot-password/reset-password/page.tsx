@@ -33,7 +33,7 @@ export default function ResetPasswordPage() {
       setMessage("Failed to reset password.");
     } else {
       setMessage("Password reset! You can now sign in.");
-      setTimeout(() => router.push("/login"), 3000);
+      setTimeout(() => router.push("/auth/login"), 3000);
     }
   };
 

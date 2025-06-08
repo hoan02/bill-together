@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
       <div className="grid grid-cols-3 gap-2">
         <Button type="submit">Send Reset Link</Button>
         <Button asChild variant={"outline"}>
-          <Link href="/login">Sign In</Link>
+          <Link href="/auth/login">Sign In</Link>
         </Button>
       </div>
       {message && <p>{message}</p>}

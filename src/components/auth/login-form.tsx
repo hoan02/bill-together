@@ -68,10 +68,10 @@ export default function LoginForm() {
               </Label>
               <Button asChild variant="link" size="sm">
                 <Link
-                  href="/login/forgot-account"
+                  href="/auth/login/forgot-account"
                   className="link intent-info variant-ghost text-sm"
                 >
-                  Forgot your Account ?
+                  Quên tài khoản?
                 </Link>
               </Button>
             </div>
@@ -83,7 +83,6 @@ export default function LoginForm() {
               className="input sz-md variant-mixed"
             />
           </div>
-
           {
             // errorMessage && !pending && toast.promise(errorMessage)
             // <p aria-live="polite" className="text-sm text-red-500">
@@ -91,16 +90,15 @@ export default function LoginForm() {
             // </p>
           }
           <Button className="w-full" disabled={pending}>
-            Sign In
+            Đăng nhập
           </Button>
         </div>
       </div>
-
       <div className="bg-muted rounded-(--radius) border p-3">
         <p className="text-accent-foreground text-center text-sm">
-          Don&apos;t have an account ?
+          Chưa có tài khoản?
           <Button asChild variant="link" className="px-2">
-            <Link href="/auth/sign-up">Create account</Link>
+            <Link href="/auth/sign-up">Tạo tài khoản</Link>
           </Button>
         </p>
       </div>
