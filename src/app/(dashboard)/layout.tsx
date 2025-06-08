@@ -1,8 +1,8 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
 
-import { Header } from "@/components/header/Header";
+import { Header } from "@/components/dashboard/header/Header";
 import { DashboardProvider } from "@/components/providers/dashboard-provider";
+import { AppSidebar } from "@/components/dashboard/sidebar/app-sidebar";
 
 export default async function LayoutDashboard({
   children,

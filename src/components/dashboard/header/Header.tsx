@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useNavStore } from "@/store/nav-store";
-import ThemeToggle from "../custom-ui/theme-toggle";
+import ThemeToggle from "../../custom-ui/theme-toggle";
 
 export function Header() {
   const { activeNavKey } = useNavStore();

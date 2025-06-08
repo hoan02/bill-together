@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { signIn } from "@/actions/auth.action";
 import SignInSocial from "./sign-in-social";
+import Image from "next/image";
 
 export default function LoginForm() {
   const initialState = { errorMessage: "" };
@@ -28,9 +29,16 @@ export default function LoginForm() {
     >
       <div className="p-8 pb-6">
         <div className="text-center pb-4">
-          <Link href="/" className="flex justify-center" aria-label="go home">
-            <Icons.logo className="h-10 w-10" />
-          </Link>
+          <div className="flex justify-center">
+            <Link href="/" aria-label="go home">
+              <Image
+                src="/logo/logo-64.png"
+                alt="logo"
+                width={50}
+                height={50}
+              />
+            </Link>
+          </div>
           <h1 className="mb-1 mt-4 text-xl font-semibold">
             Đăng nhập tài khoản
           </h1>

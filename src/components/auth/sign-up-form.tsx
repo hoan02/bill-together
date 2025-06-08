@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { signUp } from "@/actions/auth.action";
+import Image from "next/image";
 
 export default function SignupForm() {
   const initialState = { errorMessage: "" };
@@ -26,10 +27,17 @@ export default function SignupForm() {
       className="bg-card m-auto h-fit w-full max-w-sm rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-zinc-900)]"
     >
       <div className="p-8 pb-6">
-        <div className="text-center pb-4"> 
-          <Link href="/" className="flex justify-center" aria-label="go home">
-            <Icons.logo className="h-10 w-10" />
-          </Link>
+        <div className="text-center pb-4">
+          <div className="flex justify-center">
+            <Link href="/" aria-label="go home">
+              <Image
+                src="/logo/logo-64.png"
+                alt="logo"
+                width={50}
+                height={50}
+              />
+            </Link>
+          </div>
           <h1 className="text-title mb-1 mt-4 text-xl font-semibold">
             Đăng ký tài khoản
           </h1>

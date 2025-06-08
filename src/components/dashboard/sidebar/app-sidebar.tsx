@@ -14,10 +14,10 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
-import { NavMain } from "@/components/sidebar/nav-main";
-import { NavProjects } from "@/components/sidebar/nav-projects";
-import { NavUser } from "@/components/sidebar/nav-user";
-import { TeamSwitcher } from "@/components/sidebar/team-switcher";
+import { NavMain } from "@/components/dashboard/sidebar/nav-main";
+import { NavProjects } from "@/components/dashboard/sidebar/nav-projects";
+import { NavUser } from "@/components/dashboard/sidebar/nav-user";
+import { TeamSwitcher } from "@/components/dashboard/sidebar/team-switcher";
 import {
   Sidebar,
   SidebarContent,
