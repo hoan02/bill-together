@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "setup": "NODE_ENV=development npm install --legacy-peer-deps",
     "build": "next build",
+    "build:prod": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint"
   },
