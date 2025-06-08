@@ -85,7 +85,7 @@ export default function SignupForm() {
               className="input sz-md variant-mixed"
             />
           </div>
-          <Button className="w-full" disabled={pending}>
+          <Button className="w-full" loading={pending}>
             Tiếp tục
           </Button>
         </div>

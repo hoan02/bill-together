@@ -89,7 +89,7 @@ export default function LoginForm() {
             //   {errorMessage}
             // </p>
           }
-          <Button className="w-full" disabled={pending}>
+          <Button className="w-full" loading={pending}>
             Đăng nhập
           </Button>
         </div>
