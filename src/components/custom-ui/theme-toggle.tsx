@@ -1,10 +1,11 @@
 "use client";
 
-import { Moon, Sun, Laptop } from "lucide-react";
-import { Button } from "../ui/button";
-import { useThemeStore } from "@/store/theme-store";
-import { useTheme } from "next-themes";
 import { useEffect } from "react";
+import { Sun, Moon, Laptop } from "lucide-react";
+import { useTheme } from "next-themes";
+
+import { useThemeStore } from "@/store/theme-store";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,21 +14,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function ThemeToggle() {
-  const { isDarkMode, toggleTheme } = useThemeStore();
-  const { theme, setTheme } = useTheme();
+  const { setDarkMode } = useThemeStore();
+  const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
-    if (theme === "dark" && !isDarkMode) {
-      useThemeStore.setState({ isDarkMode: true });
-    } else if (theme === "light" && isDarkMode) {
-      useThemeStore.setState({ isDarkMode: false });
-    }
-  }, [theme, isDarkMode]);
-
-  const handleToggleTheme = () => {
-    toggleTheme();
-    setTheme(isDarkMode ? "light" : "dark");
-  };
+    setDarkMode(resolvedTheme === "dark");
+  }, [resolvedTheme, setDarkMode]);
 
   return (
     <DropdownMenu>

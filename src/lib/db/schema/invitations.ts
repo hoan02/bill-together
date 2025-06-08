@@ -1,4 +1,4 @@
-import { pgTable, varchar, timestamp, text } from "drizzle-orm/pg-core";
+import { pgTable, varchar, timestamp } from "drizzle-orm/pg-core";
 import { organizations } from "./organizations";
 import { users } from "./users";
 

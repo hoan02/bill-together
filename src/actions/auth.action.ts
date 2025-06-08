@@ -4,9 +4,8 @@ import { redirect } from "next/navigation";
 import { APIError } from "better-auth/api";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { and, eq, ne } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { users } from "@/lib/db/schema/users";
-import { revalidatePath } from "next/cache";
 
 interface State {
   errorMessage?: string | null;
