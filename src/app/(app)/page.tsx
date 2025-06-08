@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const LandingPage = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-orange-50 to-yellow-100 flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-orange-50 to-yellow-100 flex flex-col items-center justify-center px-6 py-12 animate-fade-in">
       <div className="text-center max-w-2xl">
         <h1 className="text-5xl md:text-6xl font-extrabold text-rose-600 mb-4 drop-shadow-md transition-all duration-500">
           Chia tiền dễ dàng cùng{" "}
@@ -27,7 +27,7 @@ const LandingPage = () => {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

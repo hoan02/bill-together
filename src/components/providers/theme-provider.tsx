@@ -1,20 +1,24 @@
 "use client";
-
 import {
   ThemeProvider as NextThemesProvider,
   ThemeProviderProps,
 } from "next-themes";
+import { cn } from "@/lib/utils";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+interface ExtendedThemeProviderProps extends ThemeProviderProps {
+  containerClassName?: string;
+}
+
+export function ThemeProvider({
+  children,
+  containerClassName,
+  ...props
+}: ExtendedThemeProviderProps) {
   return (
-    <NextThemesProvider
-      {...props}
-      defaultTheme="system"
-      attribute="class"
-      enableSystem={true}
-      disableTransitionOnChange={true}
-    >
-      {children}
+    <NextThemesProvider {...props}>
+      <div className={cn("container", containerClassName)}>
+        {children}
+      </div>
     </NextThemesProvider>
   );
 }

@@ -8,3 +8,4 @@ export * from './bills';
 export * from './bill_items';
 export * from './bill_item_shares';
 export * from './deposits';
+export * from "./verification";
