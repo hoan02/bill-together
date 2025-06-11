@@ -67,7 +67,7 @@ const HeroSection: React.FC = () => {
         >
           <FloatingElement delay={0.5} amplitude={15}>
             <motion.h1
-              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent mb-6"
+              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent mb-10"
               initial={{ opacity: 0, scale: 0.5, rotateX: -90 }}
               animate={{ opacity: 1, scale: 1, rotateX: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}

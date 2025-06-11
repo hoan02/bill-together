@@ -1,5 +1,3 @@
-import React from "react";
-
 import HeroSection from "@/components/landing/hero-section";
 import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
@@ -10,7 +8,7 @@ import FooterSection from "@/components/landing/footer-section";
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="">
       <HeroSection />
       <FeaturesSection />
       <StatsSection />
