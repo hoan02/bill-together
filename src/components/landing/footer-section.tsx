@@ -18,7 +18,7 @@ const FooterSection: React.FC = () => {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        © 2024 — Bill Together by{" "}
+        © 2025 — Bill Together by{" "}
         <a
           href="https://facebook.com/hoanit02"
           target="_blank"

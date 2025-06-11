@@ -85,7 +85,7 @@ const StatsSection: React.FC = () => {
               whileHover={{ scale: 1.1, y: -10 }}
             >
               <motion.div
-                className="relative"
+                className="relative py-4"
                 animate={{
                   boxShadow: [
                     "0 0 20px rgba(255,255,255,0.1)",

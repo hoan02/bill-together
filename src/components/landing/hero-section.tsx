@@ -1,35 +1,38 @@
 "use client";
 
 import React from "react";
-
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import FloatingElement from "./floating-element";
 
 const HeroSection: React.FC = () => {
+  const router = useRouter();
+
   return (
-    <section className="relative overflow-hidden pt-20 pb-32">
+    <section className="relative min-h-screen overflow-hidden flex items-center">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/10 to-teal-600/10"></div>
 
       {/* Floating Background Elements */}
       <motion.div
-        className="absolute top-20 left-10 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+        className="absolute top-20 left-10 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter opacity-70"
         animate={{
-          scale: [1, 1.2, 1],
+          scale: [1, 1.3, 1],
           rotate: [0, 180, 360],
           x: [0, 50, 0],
           y: [0, -30, 0],
         }}
         transition={{
-          duration: 20,
+          duration: 10,
           repeat: Infinity,
           ease: "linear",
         }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"
+        className="absolute bottom-20 right-10 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter opacity-70"
         animate={{
           scale: [1.2, 1, 1.2],
           rotate: [360, 180, 0],
@@ -37,7 +40,7 @@ const HeroSection: React.FC = () => {
           y: [0, 40, 0],
         }}
         transition={{
-          duration: 25,
+          duration: 15,
           repeat: Infinity,
           ease: "linear",
         }}
@@ -45,14 +48,14 @@ const HeroSection: React.FC = () => {
 
       {/* Additional floating elements */}
       <motion.div
-        className="absolute top-1/3 right-1/4 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-lg opacity-50"
+        className="absolute top-1/3 right-1/4 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter opacity-50"
         animate={{
           scale: [0.8, 1.1, 0.8],
           rotate: [0, 360],
           opacity: [0.3, 0.7, 0.3],
         }}
         transition={{
-          duration: 15,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -67,7 +70,7 @@ const HeroSection: React.FC = () => {
         >
           <FloatingElement delay={0.5} amplitude={15}>
             <motion.h1
-              className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent mb-10"
+              className="leading-24 text-5xl md:text-7xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 bg-clip-text text-transparent mb-6"
               initial={{ opacity: 0, scale: 0.5, rotateX: -90 }}
               animate={{ opacity: 1, scale: 1, rotateX: 0 }}
               transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
@@ -115,6 +118,7 @@ const HeroSection: React.FC = () => {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform transition-all duration-300"
+                onClick={() => router.push("/dashboard")}
               >
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
