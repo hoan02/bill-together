@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 
 import {
@@ -12,13 +14,12 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuButton,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { useNavStore } from "@/store/nav-store";
 
 export function NavMain({
   items,
@@ -33,14 +34,46 @@ export function NavMain({
     }[];
   }[];
 }) {
-  const { activeNavKey, setActiveNavKey } = useNavStore();
+  const pathname = usePathname();
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>Điều hướng</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
-          const isActive = activeNavKey === item.title;
+          const isChildActive = item.items?.some((subItem) =>
+            pathname.startsWith(subItem.url)
+          );
+          const isActive =
+            pathname === item.url ||
+            pathname.startsWith(item.url) ||
+            isChildActive;
+
+          const activeClass = isActive
+            ? "bg-muted font-semibold"
+            : "";
+
+          // Trường hợp không có sub menu
+          if (!item.items || item.items.length === 0) {
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild tooltip={item.title}>
+                  <Link
+                    href={item.url}
+                    aria-current={isActive ? "page" : undefined}
+                    className={
+                      activeClass + " w-full flex items-center gap-2 px-2 py-2"
+                    }
+                  >
+                    {item.icon && <item.icon className="w-4 h-4" />}
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          }
+
+          // Trường hợp có sub menu
           return (
             <Collapsible
               key={item.title}
@@ -52,32 +85,36 @@ export function NavMain({
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton
                     tooltip={item.title}
-                    onClick={() => setActiveNavKey(item.title)}
                     aria-current={isActive ? "page" : undefined}
+                    className={activeClass}
                   >
-                    {item.icon && <item.icon />}
+                    {item.icon && <item.icon className="w-4 h-4" />}
                     <span>{item.title}</span>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
-                          <a
-                            href={subItem.url}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setActiveNavKey(item.title);
-                            }}
-                            aria-current={isActive ? "page" : undefined}
-                          >
-                            <span>{subItem.title}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
+                    {item.items.map((subItem) => {
+                      const isSubActive = pathname === subItem.url;
+                      return (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <Link
+                              href={subItem.url}
+                              aria-current={isSubActive ? "page" : undefined}
+                              className={
+                                isSubActive
+                                  ? "bg-muted font-medium text-primary"
+                                  : ""
+                              }
+                            >
+                              <span>{subItem.title}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      );
+                    })}
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </SidebarMenuItem>

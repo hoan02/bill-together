@@ -1,16 +1,14 @@
 "use client";
 
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
+  Users,
+  ReceiptText,
+  BarChart3,
   Settings2,
-  SquareTerminal,
+  GalleryVerticalEnd,
+  Landmark,
+  PlusCircle,
+  LayoutDashboard,
 } from "lucide-react";
 import * as React from "react";
 
@@ -27,144 +25,107 @@ import {
 } from "@/components/ui/sidebar";
 
 // This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+const organizations = [
+  {
+    name: "Team Ăn nhậu Quận 1",
+    logo: GalleryVerticalEnd,
+    plan: "Free",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-};
+  {
+    name: "Gia đình 4 người",
+    logo: Landmark,
+    plan: "Pro",
+  },
+];
+
+const navMain = [
+  {
+    title: "Tổng quan",
+    url: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Hoá đơn",
+    url: "/bills",
+    icon: ReceiptText,
+    items: [
+      {
+        title: "Tất cả hoá đơn",
+        url: "/bills",
+      },
+      {
+        title: "Thêm hoá đơn",
+        url: "/bills/new",
+      },
+    ],
+  },
+  {
+    title: "Thành viên",
+    url: "/members",
+    icon: Users,
+  },
+  {
+    title: "Báo cáo",
+    url: "/reports",
+    icon: BarChart3,
+    items: [
+      {
+        title: "Tổng kết theo tháng",
+        url: "/reports/monthly",
+      },
+      {
+        title: "Theo thành viên",
+        url: "/reports/members",
+      },
+      {
+        title: "Theo hoá đơn",
+        url: "/reports/bills",
+      },
+    ],
+  },
+  {
+    title: "Cài đặt tổ chức",
+    url: "/settings",
+    icon: Settings2,
+    items: [
+      {
+        title: "Thông tin chung",
+        url: "/settings/general",
+      },
+      {
+        title: "Mã mời",
+        url: "/settings/invite",
+      },
+      {
+        title: "Phân quyền",
+        url: "/settings/roles",
+      },
+    ],
+  },
+];
+
+const projects = [
+  {
+    name: "Nhóm cuối tuần",
+    url: "/organizations/weekend",
+    icon: PlusCircle,
+  },
+  {
+    name: "Chuyến đi Đà Lạt",
+    url: "/organizations/dalat-trip",
+    icon: PlusCircle,
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={organizations} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={navMain} />
+        <NavProjects projects={projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

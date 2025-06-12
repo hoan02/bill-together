@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,35 +13,52 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { useNavStore } from "@/store/nav-store";
 import ThemeToggle from "../../custom-ui/theme-toggle";
 
 export function Header() {
-  const { activeNavKey } = useNavStore();
+  const pathname = usePathname();
 
-  // Map activeNavKey to breadcrumb items
-  // This mapping can be adjusted as needed
   const breadcrumbMap: Record<string, { label: string; href?: string }[]> = {
-    Playground: [
-      { label: "Building Your Application", href: "#" },
-      { label: "Playground" },
+    "/dashboard": [{ label: "Tổng quan" }],
+    "/bills": [
+      { label: "Hoá đơn", href: "/bills" },
+      { label: "Tất cả hoá đơn" },
     ],
-    Models: [
-      { label: "Building Your Application", href: "#" },
-      { label: "Models" },
+    "/bills/new": [
+      { label: "Hoá đơn", href: "/bills" },
+      { label: "Thêm hoá đơn" },
     ],
-    Documentation: [
-      { label: "Building Your Application", href: "#" },
-      { label: "Documentation" },
+    "/members": [{ label: "Thành viên" }],
+    "/reports": [{ label: "Báo cáo", href: "/reports" }],
+    "/reports/monthly": [
+      { label: "Báo cáo", href: "/reports" },
+      { label: "Tổng kết theo tháng" },
     ],
-    Settings: [
-      { label: "Building Your Application", href: "#" },
-      { label: "Settings" },
+    "/reports/members": [
+      { label: "Báo cáo", href: "/reports" },
+      { label: "Theo thành viên" },
+    ],
+    "/reports/bills": [
+      { label: "Báo cáo", href: "/reports" },
+      { label: "Theo hoá đơn" },
+    ],
+    "/settings": [{ label: "Cài đặt tổ chức", href: "/settings" }],
+    "/settings/general": [
+      { label: "Cài đặt tổ chức", href: "/settings" },
+      { label: "Thông tin chung" },
+    ],
+    "/settings/invite": [
+      { label: "Cài đặt tổ chức", href: "/settings" },
+      { label: "Mã mời" },
+    ],
+    "/settings/roles": [
+      { label: "Cài đặt tổ chức", href: "/settings" },
+      { label: "Phân quyền" },
     ],
   };
 
-  const breadcrumbItems = breadcrumbMap[activeNavKey] || [
-    { label: "Building Your Application", href: "#" },
+  const breadcrumbItems = breadcrumbMap[pathname] || [
+    { label: "Ứng dụng chia tiền" },
   ];
 
   return (

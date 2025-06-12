@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const CTASection: React.FC = () => {
   return (
@@ -51,12 +52,12 @@ const CTASection: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Button
-              size="lg"
+            <Link
+              href={"/dashboard"}
               className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transform transition-all duration-300"
             >
               Bắt đầu ngay
-            </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
