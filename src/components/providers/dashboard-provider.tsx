@@ -3,6 +3,7 @@
 import { ReactNode, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useUserStore } from "@/store/user-store";
+import { ThemeProvider } from "next-themes";
 
 interface DashboardProviderProps {
   children: ReactNode;
@@ -19,5 +20,14 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     }
   }, [user, setUser]);
 
-  return <>{children}</>;
+  return (
+    <ThemeProvider
+      attribute={"class"}
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  );
 }
