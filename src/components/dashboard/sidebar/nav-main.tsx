@@ -49,9 +49,7 @@ export function NavMain({
             pathname.startsWith(item.url) ||
             isChildActive;
 
-          const activeClass = isActive
-            ? "bg-muted font-semibold"
-            : "";
+          const activeClass = isActive ? "bg-muted font-semibold" : "";
 
           // Trường hợp không có sub menu
           if (!item.items || item.items.length === 0) {

@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const CTASection: React.FC = () => {

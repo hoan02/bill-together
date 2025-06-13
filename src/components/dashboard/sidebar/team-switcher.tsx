@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ChevronsUpDown, Plus } from "lucide-react"
+import * as React from "react";
+import { ChevronsUpDown, Plus } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -11,28 +11,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import FormJoinTeam from "../teams/form-join-team";
 
 export function TeamSwitcher({
   teams,
 }: {
   teams: {
-    name: string
-    logo: React.ElementType
-    plan: string
-  }[]
+    name: string;
+    logo: React.ElementType;
+    plan: string;
+  }[];
 }) {
-  const { isMobile } = useSidebar()
-  const [activeTeam, setActiveTeam] = React.useState(teams[0])
+  const { isMobile } = useSidebar();
+  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
   if (!activeTeam) {
-    return null
+    return null;
   }
 
   return (
@@ -77,15 +79,27 @@ export function TeamSwitcher({
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                <Plus className="size-4" />
-              </div>
-              <div className="text-muted-foreground font-medium">Add team</div>
-            </DropdownMenuItem>
+            <Dialog>
+              <DialogTrigger asChild>
+                <DropdownMenuItem
+                  onSelect={(e) => {
+                    e.preventDefault();
+                  }}
+                  className="gap-2 p-2 cursor-pointer"
+                >
+                  <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                    <Plus className="size-4" />
+                  </div>
+                  <span className="font-medium text-muted-foreground">
+                    Add team
+                  </span>
+                </DropdownMenuItem>
+              </DialogTrigger>
+              <FormJoinTeam />
+            </Dialog>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }
