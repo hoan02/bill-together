@@ -1,5 +1,5 @@
 {
-  "id": "30dc728a-1cf3-4630-ba55-74cc090310ff",
+  "id": "86ef607d-7ba6-4c20-89ef-5d432e7fdf3a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,19 +10,19 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "name": {
           "name": "name",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -30,18 +30,29 @@
           "name": "email_verified",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false,
-          "default": false
+          "notNull": true
         },
         "image": {
           "name": "image",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
         "role": {
           "name": "role",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -62,20 +73,6 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
         }
       },
       "indexes": {},
@@ -94,136 +91,33 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.session": {
-      "name": "session",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "token": {
-          "name": "token",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "ip_address": {
-          "name": "ip_address",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "user_agent": {
-          "name": "user_agent",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "impersonated_by": {
-          "name": "impersonated_by",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "active_organization_id": {
-          "name": "active_organization_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "session_user_id_user_id_fk": {
-          "name": "session_user_id_user_id_fk",
-          "tableFrom": "session",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "session_token_unique": {
-          "name": "session_token_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.account": {
       "name": "account",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
           "notNull": true
         },
         "account_id": {
           "name": "account_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "provider_id": {
           "name": "provider_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "password": {
-          "name": "password",
+        "user_id": {
+          "name": "user_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "access_token": {
           "name": "access_token",
@@ -261,19 +155,23 @@
           "primaryKey": false,
           "notNull": false
         },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": true
         }
       },
       "indexes": {},
@@ -298,42 +196,174 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.session": {
+      "name": "session",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "impersonated_by": {
+          "name": "impersonated_by",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active_organization_id": {
+          "name": "active_organization_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "session_user_id_user_id_fk": {
+          "name": "session_user_id_user_id_fk",
+          "tableFrom": "session",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "session_token_unique": {
+          "name": "session_token_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "token"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.verification": {
+      "name": "verification",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.organization": {
       "name": "organization",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "name": {
           "name": "name",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "slug": {
           "name": "slug",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "logo": {
           "name": "logo",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "join_code": {
-          "name": "join_code",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "metadata": {
-          "name": "metadata",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -342,26 +372,24 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
+          "notNull": true
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
+        "metadata": {
+          "name": "metadata",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "organization_join_code_unique": {
-          "name": "organization_join_code_unique",
+        "organization_slug_unique": {
+          "name": "organization_slug_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "join_code"
+            "slug"
           ]
         }
       },
@@ -375,44 +403,44 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
           "notNull": true
         },
         "organization_id": {
           "name": "organization_id",
-          "type": "varchar(255)",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "role": {
           "name": "role",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "'member'"
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "member_user_id_user_id_fk": {
-          "name": "member_user_id_user_id_fk",
+        "member_organization_id_organization_id_fk": {
+          "name": "member_organization_id_organization_id_fk",
           "tableFrom": "member",
-          "tableTo": "user",
+          "tableTo": "organization",
           "columnsFrom": [
-            "user_id"
+            "organization_id"
           ],
           "columnsTo": [
             "id"
@@ -420,12 +448,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "member_organization_id_organization_id_fk": {
-          "name": "member_organization_id_organization_id_fk",
+        "member_user_id_user_id_fk": {
+          "name": "member_user_id_user_id_fk",
           "tableFrom": "member",
-          "tableTo": "organization",
+          "tableTo": "user",
           "columnsFrom": [
-            "organization_id"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -446,33 +474,34 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "organization_id": {
           "name": "organization_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "role": {
           "name": "role",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "status": {
           "name": "status",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'pending'"
         },
         "expires_at": {
           "name": "expires_at",
@@ -482,7 +511,7 @@
         },
         "inviter_id": {
           "name": "inviter_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         }
@@ -522,25 +551,171 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.bill": {
-      "name": "bill",
+    "public.bill_item_shares": {
+      "name": "bill_item_shares",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "bill_item_id": {
+          "name": "bill_item_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_paid": {
+          "name": "is_paid",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "bill_item_shares_bill_item_id_bill_items_id_fk": {
+          "name": "bill_item_shares_bill_item_id_bill_items_id_fk",
+          "tableFrom": "bill_item_shares",
+          "tableTo": "bill_items",
+          "columnsFrom": [
+            "bill_item_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "bill_item_shares_user_id_user_id_fk": {
+          "name": "bill_item_shares_user_id_user_id_fk",
+          "tableFrom": "bill_item_shares",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bill_items": {
+      "name": "bill_items",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "bill_id": {
+          "name": "bill_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "bill_items_bill_id_bills_id_fk": {
+          "name": "bill_items_bill_id_bills_id_fk",
+          "tableFrom": "bill_items",
+          "tableTo": "bills",
+          "columnsFrom": [
+            "bill_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.bills": {
+      "name": "bills",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "organization_id": {
           "name": "organization_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "title": {
           "name": "title",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -552,42 +727,34 @@
         },
         "total_amount": {
           "name": "total_amount",
-          "type": "integer",
+          "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": true
         },
-        "image_url": {
-          "name": "image_url",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
         "created_by_id": {
           "name": "created_by_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
+          "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "bill_organization_id_organization_id_fk": {
-          "name": "bill_organization_id_organization_id_fk",
-          "tableFrom": "bill",
+        "bills_organization_id_organization_id_fk": {
+          "name": "bills_organization_id_organization_id_fk",
+          "tableFrom": "bills",
           "tableTo": "organization",
           "columnsFrom": [
             "organization_id"
@@ -595,12 +762,12 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "bill_created_by_id_user_id_fk": {
-          "name": "bill_created_by_id_user_id_fk",
-          "tableFrom": "bill",
+        "bills_created_by_id_user_id_fk": {
+          "name": "bills_created_by_id_user_id_fk",
+          "tableFrom": "bills",
           "tableTo": "user",
           "columnsFrom": [
             "created_by_id"
@@ -608,7 +775,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -618,155 +785,27 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.bill_item": {
-      "name": "bill_item",
+    "public.bill_payments": {
+      "name": "bill_payments",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
         "bill_id": {
           "name": "bill_id",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
+        "payer_id": {
+          "name": "payer_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "quantity": {
-          "name": "quantity",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "unit_price": {
-          "name": "unit_price",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "total": {
-          "name": "total",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "default": 0
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "bill_item_bill_id_bill_id_fk": {
-          "name": "bill_item_bill_id_bill_id_fk",
-          "tableFrom": "bill_item",
-          "tableTo": "bill",
-          "columnsFrom": [
-            "bill_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.bill_item_share": {
-      "name": "bill_item_share",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "item_id": {
-          "name": "item_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "amount": {
-          "name": "amount",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "bill_item_share_item_id_bill_item_id_fk": {
-          "name": "bill_item_share_item_id_bill_item_id_fk",
-          "tableFrom": "bill_item_share",
-          "tableTo": "bill_item",
-          "columnsFrom": [
-            "item_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "bill_item_share_user_id_user_id_fk": {
-          "name": "bill_item_share_user_id_user_id_fk",
-          "tableFrom": "bill_item_share",
-          "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.deposit": {
-      "name": "deposit",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "organization_id": {
-          "name": "organization_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
         },
         "amount": {
           "name": "amount",
@@ -778,36 +817,41 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "deposit_organization_id_organization_id_fk": {
-          "name": "deposit_organization_id_organization_id_fk",
-          "tableFrom": "deposit",
-          "tableTo": "organization",
+        "bill_payments_bill_id_bills_id_fk": {
+          "name": "bill_payments_bill_id_bills_id_fk",
+          "tableFrom": "bill_payments",
+          "tableTo": "bills",
           "columnsFrom": [
-            "organization_id"
+            "bill_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "deposit_user_id_user_id_fk": {
-          "name": "deposit_user_id_user_id_fk",
-          "tableFrom": "deposit",
+        "bill_payments_payer_id_user_id_fk": {
+          "name": "bill_payments_payer_id_user_id_fk",
+          "tableFrom": "bill_payments",
           "tableTo": "user",
           "columnsFrom": [
-            "user_id"
+            "payer_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -817,8 +861,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.verification": {
-      "name": "verification",
+    "public.bill_splits": {
+      "name": "bill_splits",
       "schema": "",
       "columns": {
         "id": {
@@ -827,39 +871,149 @@
           "primaryKey": true,
           "notNull": true
         },
-        "identifier": {
-          "name": "identifier",
+        "bill_item_id": {
+          "name": "bill_item_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "value": {
-          "name": "value",
+        "user_id": {
+          "name": "user_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "timestamp with time zone",
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_paid": {
+          "name": "is_paid",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "bill_splits_bill_item_id_bill_items_id_fk": {
+          "name": "bill_splits_bill_item_id_bill_items_id_fk",
+          "tableFrom": "bill_splits",
+          "tableTo": "bill_items",
+          "columnsFrom": [
+            "bill_item_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "bill_splits_user_id_user_id_fk": {
+          "name": "bill_splits_user_id_user_id_fk",
+          "tableFrom": "bill_splits",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.deposits": {
+      "name": "deposits",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "organization_id": {
+          "name": "organization_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": true
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "deposits_organization_id_organization_id_fk": {
+          "name": "deposits_organization_id_organization_id_fk",
+          "tableFrom": "deposits",
+          "tableTo": "organization",
+          "columnsFrom": [
+            "organization_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "deposits_user_id_user_id_fk": {
+          "name": "deposits_user_id_user_id_fk",
+          "tableFrom": "deposits",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

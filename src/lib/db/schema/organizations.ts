@@ -1,12 +1,10 @@
-import { pgTable, varchar, timestamp, text } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const organizations = pgTable("organization", {
-  id: varchar("id", { length: 255 }).primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  slug: varchar("slug", { length: 255 }),
-  logo: varchar("logo", { length: 255 }),
-  joinCode: varchar("join_code", { length: 255 }).unique().notNull(),
-  metadata: text("metadata"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  slug: text('slug').unique(),
+  logo: text('logo'),
+  createdAt: timestamp('created_at').notNull(),
+  metadata: text('metadata')
 });

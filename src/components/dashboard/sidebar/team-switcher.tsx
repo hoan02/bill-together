@@ -1,11 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUpDown, Plus } from "lucide-react";
-
+import { ChevronsUpDown, Plus, PlusCircle } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -21,15 +24,24 @@ import {
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import FormJoinTeam from "../teams/form-join-team";
 
+interface Team {
+  id: string;
+  name: string;
+  logo: LucideIcon;
+  plan: string;
+}
+
+interface TeamSwitcherProps {
+  teams: Team[];
+  onTeamChange: (teamId: string) => void;
+  activeTeamId?: string;
+}
+
 export function TeamSwitcher({
   teams,
-}: {
-  teams: {
-    name: string;
-    logo: React.ElementType;
-    plan: string;
-  }[];
-}) {
+  onTeamChange,
+  activeTeamId,
+}: TeamSwitcherProps) {
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
 
@@ -37,66 +49,64 @@ export function TeamSwitcher({
     return null;
   }
 
+  const Logo = activeTeam?.logo;
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{activeTeam.name}</span>
-                <span className="truncate text-xs">{activeTeam.plan}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
+            <Button variant="ghost" className="w-full justify-start gap-2 px-2">
+              {Logo ? (
+                <>
+                  <Logo className="h-5 w-5" />
+                  <span className="flex-1 truncate">{activeTeam?.name}</span>
+                </>
+              ) : (
+                <>
+                  <PlusCircle className="h-5 w-5" />
+                  <span className="flex-1 truncate">Chọn tổ chức</span>
+                </>
+              )}
+            </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            align="start"
-            side={isMobile ? "bottom" : "right"}
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="text-muted-foreground text-xs">
-              Teams
-            </DropdownMenuLabel>
-            {teams.map((team, index) => (
+          <DropdownMenuContent className="w-[200px]">
+            <DropdownMenuLabel>Tổ chức của bạn</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {teams.map((team) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
-                className="gap-2 p-2"
+                key={team.id}
+                onClick={() => {
+                  setActiveTeam(team);
+                  onTeamChange(team.id);
+                }}
+                className="flex items-center gap-2"
               >
-                <div className="flex size-6 items-center justify-center rounded-md border">
-                  <team.logo className="size-3.5 shrink-0" />
-                </div>
-                {team.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                <team.logo className="h-4 w-4" />
+                <span className="flex-1 truncate">{team.name}</span>
+                {team.plan && (
+                  <span className="text-xs text-muted-foreground">
+                    {team.plan}
+                  </span>
+                )}
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <Dialog>
-              <DialogTrigger asChild>
-                <DropdownMenuItem
-                  onSelect={(e) => {
-                    e.preventDefault();
-                  }}
-                  className="gap-2 p-2 cursor-pointer"
-                >
-                  <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                    <Plus className="size-4" />
-                  </div>
-                  <span className="font-medium text-muted-foreground">
-                    Add team
-                  </span>
-                </DropdownMenuItem>
-              </DialogTrigger>
-              <FormJoinTeam />
-            </Dialog>
+            <DropdownMenuItem asChild>
+              <Link
+                href="/organizations/new"
+                className="flex items-center gap-2"
+              >
+                <PlusCircle className="h-4 w-4" />
+                <span>Tạo tổ chức mới</span>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/join" className="flex items-center gap-2">
+                <PlusCircle className="h-4 w-4" />
+                <span>Tham gia tổ chức</span>
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

@@ -1,15 +1,43 @@
-import { pgTable, varchar, text, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, decimal, boolean } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { organizations } from "./organizations";
 
-export const bills = pgTable("bill", {
-  id: varchar("id", { length: 255 }).primaryKey(),
-  organizationId: varchar("organization_id", { length: 255 }).references(() => organizations.id).notNull(),
-  title: varchar("title", { length: 255 }).notNull(),
+export const bills = pgTable("bills", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organizations.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
   description: text("description"),
-  totalAmount: integer("total_amount").notNull(),
-  imageUrl: varchar("image_url", { length: 255 }),
-  createdById: varchar("created_by_id", { length: 255 }).references(() => users.id),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  totalAmount: decimal("total_amount", { precision: 10, scale: 2 }).notNull(),
+  createdById: text("created_by_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").notNull(),
+  updatedAt: timestamp("updated_at").notNull(),
+});
+
+export const billItems = pgTable("bill_items", {
+  id: text("id").primaryKey(),
+  billId: text("bill_id")
+    .notNull()
+    .references(() => bills.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  updatedAt: timestamp("updated_at").notNull(),
+});
+
+export const billItemShares = pgTable("bill_item_shares", {
+  id: text("id").primaryKey(),
+  billItemId: text("bill_item_id")
+    .notNull()
+    .references(() => billItems.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  isPaid: boolean("is_paid").default(false).notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  updatedAt: timestamp("updated_at").notNull(),
 });
