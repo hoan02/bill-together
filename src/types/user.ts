@@ -3,11 +3,11 @@ export interface User {
   name: string;
   email: string;
   emailVerified: boolean;
+  image?: string;
   createdAt: Date;
   updatedAt: Date;
-  image?: string | null;
-  banned?: boolean | null;
-  role?: string | null;
-  banReason?: string | null;
-  banExpires?: Date | null;
+  role?: string;
+  banned?: boolean;
+  banReason?: string;
+  banExpires?: Date;
 }

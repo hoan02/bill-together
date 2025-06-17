@@ -30,10 +30,12 @@ export async function createOrganization(data: z.infer<typeof createOrganization
     const [organization] = await db
       .insert(organizations)
       .values({
+        id: nanoid(),
         name: validatedData.name,
         description: validatedData.description,
         inviteCode: nanoid(8),
         createdById: session.user.id,
+        createdAt: new Date(),
       })
       .returning();
 
@@ -46,9 +48,11 @@ export async function createOrganization(data: z.infer<typeof createOrganization
 
     // Thêm người tạo vào danh sách thành viên với vai trò ADMIN
     await db.insert(members).values({
+      id: nanoid(),
       organizationId: organization.id,
       userId: session.user.id,
       role: "ADMIN",
+      createdAt: new Date(),
     });
 
     return {

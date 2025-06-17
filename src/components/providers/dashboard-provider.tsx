@@ -16,7 +16,10 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
 
   useEffect(() => {
     if (user) {
-      setUser(user);
+      setUser({
+        ...user,
+        image: user.image ?? undefined,
+      });
     }
   }, [user, setUser]);
 

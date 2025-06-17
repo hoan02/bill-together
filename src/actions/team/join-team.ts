@@ -59,9 +59,11 @@ export async function joinTeam(data: z.infer<typeof joinTeamSchema>) {
 
     // Thêm người dùng vào tổ chức
     await db.insert(members).values({
+      id: crypto.randomUUID(),
       organizationId: organization.id,
       userId: session.user.id,
       role: "MEMBER",
+      createdAt: new Date(),
     });
 
     return {

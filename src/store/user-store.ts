@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Organization } from "better-auth";
+import type { Organization } from "@/types/organization";
 
 interface UserState {
   user: {
